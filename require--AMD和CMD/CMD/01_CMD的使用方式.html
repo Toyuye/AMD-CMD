@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	
+	<script src="libs/sea.js"></script>
+	<script>
+	//CMD   Common module defination 通用模块定义  sea.js
+	//特点 ： 按需加载,一个页面只要一个 sea.js就够了
+	//        其他js 都在 sea.js功能模块里，看情况加载
+	//注意：define的参数 无需依赖，只要一个函数fn
+	//      其他和 AMD的模块一样，定义对象，返回对象
+
+	//关键字  全局变量 seajs   define， 以及 seajs.use()
+	//1.define 是来定义一个模块
+	//   define(function(require,exports,module){  })
+	//   参数：功能模块函数，三个参数
+	//			require 是一个加载依赖的函数
+	// 			exports 是一个obj对象
+	// 			module是一个t对象
+	//  module.exports = xxxx;  相当于 return xxx;
+
+	//2.seajs 是一个对象，但是目前只使用 seajs.use()方法
+
+	//3.seajs.use("当前页面的业务逻辑的 js 路径",callback)
+	//
+	//参数1：cmd规范下， 路径都是从js文件本身路径开始
+	//    	 且在CMD里  ./代表回到上一级
+	//       另外，在模块的require("路径")的时候，注意./的使用，很诡异
+	//参数2：回调函数，处理模块的返回值，
+		seajs.use("./module/index");
+		seajs.use("./module/randomColor",function(res){
+			console.log(res);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		ul,li{list-style: none}
+
+		li{
+			width: 400px;
+			height:100px;
+			
+		}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<script src="libs/require.js"></script>
+	<script>
+	// AMD:  Asynchronous module defination  异步的模块定义
+	//  将以前的 代码 js 分拆 一个个 功能模块
+	//  在用到的时候，加载该功能模块
+	//  特点： 主体html   依赖  和  模块
+	//       依赖就是define创建模块 时 需要用到的一些支持，
+	//       大多是js，也可以是一个txt，json，图片等等
+	
+	//首先 该规范提供了一个 js ：  require.js
+	//该js中就 3个全局变量，关键字
+	// requirejs   require  define
+	//注意： 所有加载  都是 异步，
+
+	// 1. define是来定义模块（功能）的
+	//     define([" "," "],function(){})
+	//     define(function(){})
+	//    参数1：数组可选，模块依赖的js文件，0个1个多个， 如jQuery类库等等，
+	//           相当于初始化该js文件，说明下面的模块功能会 用到 该js文件
+	//             
+	//    参数2：必选，功能函数，一般会在里面定义一个对象，并且return一个对象
+	//           
+	// 2. 其中requirejs 基本等于  require，是用来调用模块 ，处理模块的返回值
+	//    require([""], callback);
+
+	//    require(["模块的js路径"],function(res){});
+
+	//    参数1： 要加载的模块的路径，1-多个,如果要加载多个模块
+	//            按先后顺序加载，且全部加载完后才会调用 callback
+
+	//    参数2： 回调函数，处理异步加载的结果,参数就是 模块的返回值
+	//            注意，该功能函数的形参 对应 前面加载的函数
+	//            require(["moduleA","moduleB"],function(resA,resB){});
+
+
+		requirejs(["module/randomColor","module/randomColor2"],function(res,res2){
+			console.log(res.color());
+			console.log(res2.color());
+			// var aLi = document.getElementById("list").children;
+			// for(var i = 0 ; i < aLi.length; i++){
+			// 	aLi[i].style.background = res.color();
+			// }
+		});
+	</script>
+</body>
+</html>
